@@ -4,12 +4,16 @@
 let card = document.getElementsByClassName("card");
 let cards = [...card]
 
+//cartas no jogo
+const deck = document.getElementById("deck");
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -26,6 +30,19 @@ function shuffle(array) {
     return array;
 }
 
+//começar o jogo e embraralhar 
+document.body.onload = startGame();
+
+function startGame(){
+  cards = shuffle(cards);
+  //remover classes das cartas para adicionar com toggle class depois
+  for (var i = 0; i < 16; i++){
+    deck.innerHTML = "";
+    [].forEach.call(cards, function(item){
+        deck.appendChild(item);
+  });
+  cards[i].classList.remove("show", "open", "match", "disabled");
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
