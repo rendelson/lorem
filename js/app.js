@@ -30,19 +30,27 @@ function shuffle(array) {
     return array;
 }
 
-//começar o jogo e embraralhar 
+//começar o jogo e embraralhar
 document.body.onload = startGame();
 
 function startGame(){
-  cards = shuffle(cards);
-  //remover classes das cartas para adicionar com toggle class depois
-  for (var i = 0; i < 16; i++){
-    deck.innerHTML = "";
-    [].forEach.call(cards, function(item){
-        deck.appendChild(item);
-  });
-  cards[i].classList.remove("show", "open", "match", "disabled");
-}
+    cards = shuffle(cards);
+    //remover classes das cartas para adicionar com toggle class depois
+    for (var i = 0; i < 16; i++){
+        deck.innerHTML = "";
+        [].forEach.call(cards, function(item){
+            deck.appendChild(item);
+        });
+        cards[i].classList.remove("show", "open", "match", "disabled");
+    }
+
+//mostrar as cartas removento e adicionando classes com toggle
+var displayCard = function (){
+    this.classList.toggle("open");
+    this.classList.toggle("show");
+    this.classList.toggle("disabled");
+};
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
