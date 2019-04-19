@@ -9,7 +9,9 @@ let cards = [...card]
 let moves = 0;
 let counter = document.querySelector(".moves");
 
+let matchedCard = document.getElementsByClassName("match");
 
+let closeicon = document.querySelector(".close");
 
 //cartas no jogo
 const deck = document.getElementById("deck");
@@ -41,15 +43,27 @@ function shuffle(array) {
 document.body.onload = startGame();
 
 function startGame(){
+    // embaralhar
     cards = shuffle(cards);
-    //remover classes das cartas para adicionar com toggle class depois
+    // remove classes das cartas para adicionar com seletor toggle
     for (var i = 0; i < 16; i++){
         deck.innerHTML = "";
-        [].forEach.call(cards, function(item){
+        [].forEach.call(cards, function(item) {
             deck.appendChild(item);
         });
         cards[i].classList.remove("show", "open", "match", "disabled");
     }
+    //zeando movimentos
+    moves = 0;
+    conter.innerHTML = moves;
+    //zerando o tempo
+    second = 0;
+    minute = 0;
+    hour = 0;
+    var timer = document.querySelector(".timer");
+    timer.innerHTML = "o mins 0 secs";
+    clearInterval(interval);
+}
 
 //mostrar as cartas removento e adicionando classes com toggle
 var displayCard = function (){
@@ -60,16 +74,16 @@ var displayCard = function (){
 
 //matched e unmatched
 function cardOpen() {
-  openedCards.push(this);
-  var len = openedCards.length;
-  if(len === 2){
-      moveConter();
-      if(openedCards[0].type === openedCards[1].type){
-          matched();
-      } else {
-          unmatched();
-      }
-  }
+    openedCards.push(this);
+    var len = openedCards.length;
+    if(len === 2){
+        moveCounter();
+        if(openedCards[0].type === openedCards[1].type){
+            matched();
+        } else {
+            unmatched();
+        }
+    }
 };
 
 //quando as cartas são iguais
@@ -83,10 +97,23 @@ function matched(){
 
 //quando as cartas não são iguais
 function unmatched(){
-      openedCards[0].classList.add("unmatched");
-      openedCards[1].classList.add("unmatched");
-      disable();
-      openedCards = [];
+    openedCards[0].classList.add("unmatched");
+    openedCards[1].classList.add("unmatched");
+    disable();
+    setTimeout(function(){
+        openedCards[0].classList.remove("show", "open", "no-event","unmatched");
+        openedCards[1].classList.remove("show", "open", "no-event","unmatched");
+        enable();
+        openedCards = [];
+    },500);
+}
+
+
+//desabilitar
+function disable(){
+    Array.prototype.filter.call(cards, function(card){
+        card.classList.add('disabled');
+    });
 }
 
 //abrir e desabilitar cartas compativeis
@@ -100,28 +127,52 @@ function enable(){
 }
 
 
-//desabilitar
-function disable(){
-    Array.prototype.filter.call(cards, function(card){
-        card.classList.add("disabled");
-    });
-}
-
 
 //contar movimentos
-function moveConter(){
-  moves++;
-  counter.innerHTML = moves;
-}
+  function moveConter(){
+      moves++;
+      counter.innerHTML = moves;
+      if(moves == 1){
+          second = 0;
+          minute = 0;
+          hour = 0;
+          startTime();
+  };
 
+//contar tempo
+var second = 0, minute = 0; hour = 0;
+var time = document.querySelector(".timer");
+var interval;
+function startTimer(){
+      interval = setInterval(function(){
+          timer.innerHTML = minute+"mins "+second+"secs";
+          second++;
+          if(second == 60){
+                minute++;
+                second=0;
+          }
+          if(minute == 60){
+            hour++;
+            minute = 0;
+          }
+      }, 2000);
+}
 
 
 // add events
 for (var i = 0; i < 16; i++){
-  card = cards[i];
-  card.addEventListener("click", displayCard);
-  card.addEventListener("click", cardOpen);
+    card = cards[i];
+    card.addEventListener("click", displayCard);
+    card.addEventListener("click", cardOpen);
 };
+
+//jogar novamente
+
+function jogarNovamente(){
+    modal.classList.remove("show");
+    startGame();
+}
+
 
 
 /*
