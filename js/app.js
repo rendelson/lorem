@@ -11,7 +11,7 @@ let counter = document.querySelector(".moves");
 const stars = document.querySelectorAll(".fa-star");
  let starsList = document.querySelectorAll(".stars li");
 let matchedCard = document.getElementsByClassName("match");
-
+ let modal = document.getElementById("modal")
 let closeicon = document.querySelector(".close");
 
 //cartas no jogo
@@ -164,21 +164,21 @@ function moveCounter(){
 
 //contar tempo
 var second = 0, minute = 0; hour = 0;
-var time = document.querySelector(".timer");
+var timer = document.querySelector(".timer");
 var interval;
 function startTimer(){
-      interval = setInterval(function(){
-          timer.innerHTML = minute+"mins "+second+"secs";
-          second++;
-          if(second == 60){
-                minute++;
-                second=0;
-          }
-          if(minute == 60){
+    interval = setInterval(function(){
+        timer.innerHTML = minute+" minutos "+second+" segundos";
+        second++;
+        if(second == 60){
+            minute++;
+            second=0;
+        }
+        if(minute == 60){
             hour++;
             minute = 0;
-          }
-      }, 2000);
+        }
+    },2000);
 }
 
 
@@ -187,7 +187,30 @@ for (var i = 0; i < 16; i++){
     card = cards[i];
     card.addEventListener("click", displayCard);
     card.addEventListener("click", cardOpen);
+    card.addEventListener("click", fimDoJogo);
 };
+
+//fim de Jogo
+
+function fimDoJogo(){
+    if (matchedCard.length == 16){
+        clearInterval(interval);
+        finalTime = timer.innerHTML;
+        modal.classList.add("show");
+        var starRating = document.querySelector(".stars").innerHTML;
+        document.getElementById("finalMove").innerHTML = moves;
+        document.getElementById("starRating").innerHTML = starRating;
+        document.getElementById("totalTime").innerHTML = finalTime;
+        closeModal();
+    };
+}
+
+function closeModal(){
+    closeicon.addEventListener("click", function(e){
+        modal.classList.remove("show");
+        startGame();
+    });
+}
 
 //jogar novamente
 
