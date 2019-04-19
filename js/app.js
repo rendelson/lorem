@@ -4,6 +4,13 @@
 let card = document.getElementsByClassName("card");
 let cards = [...card]
 
+//variaveis para o movimento
+
+let moves = 0;
+let counter = document.querySelector(".moves");
+
+
+
 //cartas no jogo
 const deck = document.getElementById("deck");
 var openedCards = [];
@@ -14,10 +21,6 @@ var openedCards = [];
  *   - add each card's HTML to the page
  */
 
-//variaveis para o movimento
-
-let moves = 0;
-let counter = document.querySelector(".moves");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -85,6 +88,33 @@ function unmatched(){
       disable();
       openedCards = [];
 }
+
+//abrir e desabilitar cartas compativeis
+function enable(){
+    Array.prototype.filter.call(cards, function(card){
+        card.classList.remove("disabled");
+        for(var i = 0; i < matchedCard.length; i++){
+            matchedCard[i].classList.add("disabled");
+        }
+    });
+}
+
+
+//desabilitar
+function disable(){
+    Array.prototype.filter.call(cards, function(card){
+        card.classList.add("disabled");
+    });
+}
+
+
+//contar movimentos
+function moveConter(){
+  moves++;
+  counter.innerHTML = moves;
+}
+
+
 
 // add events
 for (var i = 0; i < 16; i++){
