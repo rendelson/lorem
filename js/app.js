@@ -6,7 +6,7 @@ let cards = [...card]
 
 //cartas no jogo
 const deck = document.getElementById("deck");
-
+var openedCards = [];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -14,6 +14,10 @@ const deck = document.getElementById("deck");
  *   - add each card's HTML to the page
  */
 
+//variaveis para o movimento
+
+let moves = 0;
+let counter = document.querySelector(".moves");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -64,6 +68,23 @@ function cardOpen() {
       }
   }
 };
+
+//quando as cartas são iguais
+function matched(){
+    openedCards[0].classList.add("match", "disabled");
+    openedCards[1].classList.add("match", "disabled");
+    openedCards[0].classList.remove("show", "open", "no-event");
+    openedCards[1].classList.remove("show", "open", "no-event");
+    openedCards = [];
+}
+
+//quando as cartas não são iguais
+function unmatched(){
+      openedCards[0].classList.add("unmatched");
+      openedCards[1].classList.add("unmatched");
+      disable();
+      openedCards = [];
+}
 
 // add events
 for (var i = 0; i < 16; i++){
