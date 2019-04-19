@@ -5,16 +5,17 @@ let card = document.getElementsByClassName("card");
 let cards = [...card]
 
 //variaveis para o movimento
-
+const deck = document.getElementById("deck");
 let moves = 0;
 let counter = document.querySelector(".moves");
-
+const stars = document.querySelectorAll(".fa-star");
+ let starsList = document.querySelectorAll(".stars li");
 let matchedCard = document.getElementsByClassName("match");
 
 let closeicon = document.querySelector(".close");
 
 //cartas no jogo
-const deck = document.getElementById("deck");
+
 var openedCards = [];
 /*
  * Display the cards on the page
@@ -43,9 +44,9 @@ function shuffle(array) {
 document.body.onload = startGame();
 
 function startGame(){
-    // embaralhar
+    // shuffle deck
     cards = shuffle(cards);
-    // remove classes das cartas para adicionar com seletor toggle
+    // remove all exisiting classes from each card
     for (var i = 0; i < 16; i++){
         deck.innerHTML = "";
         [].forEach.call(cards, function(item) {
@@ -53,15 +54,20 @@ function startGame(){
         });
         cards[i].classList.remove("show", "open", "match", "disabled");
     }
-    //zeando movimentos
+    // reset moves
     moves = 0;
-    conter.innerHTML = moves;
-    //zerando o tempo
+    counter.innerHTML = moves;
+    // reset rating
+    for (var i = 0; i < stars.length; i++){
+        stars[i].style.color = "#FFD700";
+        stars[i].style.visibility = "visible";
+    }
+    //reset timer
     second = 0;
     minute = 0;
     hour = 0;
     var timer = document.querySelector(".timer");
-    timer.innerHTML = "o mins 0 secs";
+    timer.innerHTML = "0 mins 0 secs";
     clearInterval(interval);
 }
 
@@ -119,7 +125,7 @@ function disable(){
 //abrir e desabilitar cartas compativeis
 function enable(){
     Array.prototype.filter.call(cards, function(card){
-        card.classList.remove("disabled");
+        card.classList.remove('disabled');
         for(var i = 0; i < matchedCard.length; i++){
             matchedCard[i].classList.add("disabled");
         }
@@ -129,15 +135,32 @@ function enable(){
 
 
 //contar movimentos
-  function moveConter(){
-      moves++;
-      counter.innerHTML = moves;
-      if(moves == 1){
-          second = 0;
-          minute = 0;
-          hour = 0;
-          startTime();
-  };
+function moveCounter(){
+    moves++;
+    counter.innerHTML = moves;
+    //iniciar o tempo
+    if(moves == 1){
+        second = 0;
+        minute = 0;
+        hour = 0;
+        startTimer();
+    }
+    // contar por estrelas
+    if (moves > 8 && moves < 16){
+        for( i= 0; i < 3; i++){
+            if(i > 1){
+                stars[i].style.visibility = "collapse";
+            }
+        }
+    }
+    else if (moves > 17){
+        for( i= 0; i < 3; i++){
+            if(i > 0){
+                stars[i].style.visibility = "collapse";
+            }
+        }
+    }
+}
 
 //contar tempo
 var second = 0, minute = 0; hour = 0;
@@ -186,4 +209,3 @@ function jogarNovamente(){
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 //debug pesquisa
-{}};
