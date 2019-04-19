@@ -51,6 +51,27 @@ var displayCard = function (){
     this.classList.toggle("disabled");
 };
 
+//matched e unmatched
+function cardOpen() {
+  openedCards.push(this);
+  var len = openedCards.length;
+  if(len === 2){
+      moveConter();
+      if(openedCards[0].type === openedCards[1].type){
+          matched();
+      } else {
+          unmatched();
+      }
+  }
+};
+
+// add events
+for (var i = 0; i < 16; i++){
+  card = cards[i];
+  card.addEventListener("click", displayCard);
+  card.addEventListener("click", cardOpen);
+};
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -62,3 +83,5 @@ var displayCard = function (){
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+//debug pesquisa
+{}};
