@@ -11,8 +11,10 @@ let counter = document.querySelector(".moves");
 const stars = document.querySelectorAll(".fa-star");
  let starsList = document.querySelectorAll(".stars li");
 let matchedCard = document.getElementsByClassName("match");
- let modal = document.getElementById("modal")
+let modal = document.getElementById("modal");
 let closeicon = document.querySelector(".close");
+
+
 
 //cartas no jogo
 
@@ -54,6 +56,8 @@ function startGame(){
         });
         cards[i].classList.remove("show", "open", "match", "disabled");
     }
+    //close modal
+    document.querySelector(".bg-modal").style.display = "none";
     // reset moves
     moves = 0;
     counter.innerHTML = moves;
@@ -70,6 +74,7 @@ function startGame(){
     timer.innerHTML = "0 mins 0 secs";
     clearInterval(interval);
 }
+
 
 //mostrar as cartas removento e adicionando classes com toggle
 var displayCard = function (){
@@ -196,7 +201,7 @@ function fimDoJogo(){
     if (matchedCard.length == 16){
         clearInterval(interval);
         finalTime = timer.innerHTML;
-        modal.classList.add("show");
+        document.querySelector(".bg-modal").style.display = "flex";
         var starRating = document.querySelector(".stars").innerHTML;
         document.getElementById("finalMove").innerHTML = moves;
         document.getElementById("starRating").innerHTML = starRating;
@@ -207,19 +212,29 @@ function fimDoJogo(){
 
 function closeModal(){
     closeicon.addEventListener("click", function(e){
-        modal.classList.remove("show");
+        document.querySelector(".bg-modal").style.display = "none";
         startGame();
     });
 }
 
 //jogar novamente
 
-function jogarNovamente(){
-    modal.classList.remove("show");
-    startGame();
-}
 
 
+
+
+
+//modal
+
+document.getElementById("play-again").addEventListener("click",
+    function() {
+    document.querySelector(".bg-modal").style.display = "none";
+});
+
+document.querySelector(".close").addEventListener("click",
+    function(){
+        document.querySelector(".bg-modal").style.display = "none";
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:

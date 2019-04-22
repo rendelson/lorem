@@ -1,20 +1,41 @@
-# Memory Game Project
+# Jogo da Memória
 
-## Table of Contents
+## O que é o jogo da memória
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+É um jogo simples construído para testar a memória do jogador.
 
-## Instructions
+## Desafio
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Encontrar cartas correspondentes no menor tempo e com a menor quantidade
+de movimentos possível.
 
-To get started, open `js/app.js` and start building out the app's functionality
+## Como Jogar
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+Abra o html em seu navegador
+
+## Instruções
+
+• Clique em uma carta
+• Clique em outra carta e guarde os resultados na memória
+• Continue clicando e procurando por cartas correspondentes
+• Quanto menor for seu tempo e menor sua quantidade de movimentos, mairo será sua pontuação.
+
+## Como o jogo foi construído
+
+Formatei o conteúdo com html estilizando com css e programando as interações com JavaScript seguindo os passos abaixo:
+
+### 1 - Criar um desck de cartas embaralhavel no início do jogo
+
+### 2 - Criar um contado que registre tempo e o numero de movimentos
+
+### 3 - Adicionar efeitos as cartas quando elas correspondem ou não
+
+### 4 - Criar um modal que avisa quando o jogo foi vencido e exipe o desenpenho do jogador
+
+
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+Este projeto foi feito para fins acadêmicos, contribuições não são aceitas fora da grade do curso.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+detalhes em [CONTRIBUTING.md](CONTRIBUTING.md).

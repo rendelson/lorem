@@ -41,7 +41,7 @@
             <li class="card" type="plane">
                 <i class="fa fa-paper-plane-o"></i>
             </li>
-            <li class="card match" type="anchor">
+            <li class="card" type="anchor">
                 <i class="fa fa-anchor"></i>
             </li>
             <li class="card" type="bolt" >
@@ -50,7 +50,7 @@
             <li class="card" type="cube">
                 <i class="fa fa-cube"></i>
             </li>
-            <li class="card match" type="anchor">
+            <li class="card" type="anchor">
                 <i class="fa fa-anchor"></i>
             </li>
             <li class="card" type="leaf">
@@ -71,7 +71,7 @@
             <li class="card" type="bomb">
                 <i class="fa fa-bomb"></i>
             </li>
-            <li class="card open show" type="bolt">
+            <li class="card" type="bolt">
                 <i class="fa fa-bolt"></i>
             </li>
             <li class="card" type="bicycle">
@@ -85,25 +85,30 @@
             </li>
         </ul>
 
-        <div id="modal" class="overlay">
-            <div class="popup">
-                <h1>Parabéns</h1>
-                <div class="restart" onclick=startGame()>X</div>
-                <div class="content-1">
-                    Você terminou \o/
-                </div>
-                <div class="content-2">
-                    <p>Total de<span id=finalMove> </span> movimentos </p>
-                    <p>em<span id=totalTime> </span> </p>
-                    <p>Pontuação:  <span id=starRating></span></p>
-                </div>
-                <button id="play-again"onclick="jogarNovamente()">
-                    Jogar novamente</a>
-                </button>
-            </div>
-        </div>
+<!--modal-->
+<div class="bg-modal">
+  <div class="modal-content">
+  <div class="close restart" onclick=startGame()>+</div>
+    <h1>Parabéns</h1>
+    <div class="content-1">
+        Você terminou \o/
+    </div>
+    <div class="content-2">
+        <p>Total de<span id=finalMove> </span> movimentos </p>
+        <p>em<span id=totalTime> </span> </p>
+        <p>Pontuação:  <span id=starRating></span></p>
+        <button id="play-again" onclick="startGame()">
+            Jogar novamente</a>
+        </button>
 
     </div>
+
+  </div>
+</div>
+
+
+
+
     <script src="js/app.js"></script>
 </body>
 </html>
